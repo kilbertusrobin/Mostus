@@ -8,25 +8,28 @@ import './App.css';
 function App() {
   const [difficulty, setDifficulty] = useState('medium');
   const [word, setWord] = useState(['C']);
+  const [letterStates, setLetterStates] = useState([]);
 
   return (
     <>
       <div id='bodiv'>
         <Title />
         <div id='gridiv'>
-          <Grid 
+          <Grid
             word='CATAPULTE'
             difficulty={difficulty}
             guessedWord={word}
+            letterStates={letterStates}
           />
-          <div style={{display:'flex', flexDirection:'column', marginLeft:'5vw', height:'10vw', alignItems:'center', justifyContent:'space-around'}}>
+          <div style={{ display: 'flex', flexDirection: 'column', marginLeft: '5vw', height: '10vw', alignItems: 'center', justifyContent: 'space-around' }}>
             <Choice setDifficulty={setDifficulty} />
           </div>
         </div>
         <div id='keyboardiv'>
-          <Keyboard 
+          <Keyboard
             answer='CATAPULTE'
             setWord={setWord}
+            setLetterStates={setLetterStates}
           />
         </div>
       </div>

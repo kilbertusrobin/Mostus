@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 
 const Keyboard = (props) => {
-  const { answer, setWord } = props;
+  const { answer, setWord, setLetterStates } = props;
   const answerLength = answer.length;
   const letters = [
     'A', 'Z', 'E', 'R', 'T', 'Y', 'U', 'I', 'O', 'P',
@@ -10,6 +10,7 @@ const Keyboard = (props) => {
   ];
 
   const [word, setWordState] = useState([answer[0]]);
+  const [letterStates, setLetterStatesState] = useState([]);
 
   const handleButtonClick = (letter) => {
     if (word.length < answerLength) {
@@ -18,15 +19,17 @@ const Keyboard = (props) => {
       setWord(newWord);
 
       if (newWord.length === answerLength) {
-        newWord.forEach((char, index) => {
+        const newLetterStates = newWord.map((char, index) => {
           if (char === answer[index]) {
-            console.log(`Lettre ${index + 1} correcte: ${char}`);
+            return 'correct';
           } else if (answer.includes(char)) {
-            console.log(`Lettre ${index + 1} présente mais incorrecte: ${char}`);
+            return 'present';
           } else {
-            console.log(`Lettre ${index + 1} incorrecte: ${char}`);
+            return 'incorrect';
           }
         });
+        setLetterStatesState(newLetterStates);
+        setLetterStates(newLetterStates);
       }
     }
   };
@@ -56,6 +59,5 @@ const Keyboard = (props) => {
     </div>
   );
 };
-
 
 export default Keyboard;
