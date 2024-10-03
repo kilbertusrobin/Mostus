@@ -7,8 +7,17 @@ import './App.css';
 
 function App() {
   const [difficulty, setDifficulty] = useState('medium');
-  const [word, setWord] = useState(['C']);
-  const [letterStates, setLetterStates] = useState([]);
+  const [currentWord, setCurrentWord] = useState(['C']);
+  const [attempts, setAttempts] = useState([]); // Stocke les essais précédents
+  const [letterStates, setLetterStates] = useState([]); // Stocke les états des lettres pour chaque ligne
+  const [currentRow, setCurrentRow] = useState(0); // Index de la ligne actuelle
+
+  const handleCompleteWord = (newWord, newLetterStates) => {
+    setAttempts([...attempts, newWord]); // Ajoute le mot actuel aux tentatives
+    setLetterStates([...letterStates, newLetterStates]); // Ajoute les états des lettres
+    setCurrentRow(currentRow + 1); // Passe à la ligne suivante
+    setCurrentWord(['C']); // Réinitialise le mot avec la première lettre
+  };
 
   return (
     <>
@@ -18,8 +27,10 @@ function App() {
           <Grid
             word='CATAPULTE'
             difficulty={difficulty}
-            guessedWord={word}
+            attempts={attempts}
             letterStates={letterStates}
+            currentWord={currentWord}
+            currentRow={currentRow}
           />
           <div style={{ display: 'flex', flexDirection: 'column', marginLeft: '5vw', height: '10vw', alignItems: 'center', justifyContent: 'space-around' }}>
             <Choice setDifficulty={setDifficulty} />
@@ -28,8 +39,9 @@ function App() {
         <div id='keyboardiv'>
           <Keyboard
             answer='CATAPULTE'
-            setWord={setWord}
-            setLetterStates={setLetterStates}
+            currentWord={currentWord}
+            setWord={setCurrentWord}
+            onCompleteWord={handleCompleteWord} // Fonction appelée quand un mot est complété
           />
         </div>
       </div>

@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 
 const Keyboard = (props) => {
-  const { answer, setWord, setLetterStates } = props;
+  const { answer, currentWord, setWord, onCompleteWord } = props;
   const answerLength = answer.length;
   const letters = [
     'A', 'Z', 'E', 'R', 'T', 'Y', 'U', 'I', 'O', 'P',
@@ -9,8 +9,11 @@ const Keyboard = (props) => {
     'W', 'X', 'C', 'V', 'B', 'N'
   ];
 
-  const [word, setWordState] = useState([answer[0]]);
-  const [letterStates, setLetterStatesState] = useState([]);
+  const [word, setWordState] = useState(currentWord);
+
+  useEffect(() => {
+    setWordState(currentWord);
+  }, [currentWord]);
 
   const handleButtonClick = (letter) => {
     if (word.length < answerLength) {
@@ -28,8 +31,8 @@ const Keyboard = (props) => {
             return 'incorrect';
           }
         });
-        setLetterStatesState(newLetterStates);
-        setLetterStates(newLetterStates);
+
+        onCompleteWord(newWord, newLetterStates); // Passe le mot complété et ses états à App.js
       }
     }
   };
@@ -41,10 +44,6 @@ const Keyboard = (props) => {
       setWord(newWord);
     }
   };
-
-  useEffect(() => {
-    console.log(word);
-  }, [word]);
 
   return (
     <div>
