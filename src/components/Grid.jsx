@@ -1,17 +1,17 @@
 import React from 'react';
 
 const Grid = (props) => {
-  const { word, difficulty } = props;
+  const { word, difficulty, guessedWord } = props;
   let nbRow = 0;
-  if (difficulty === 'easy'){
+  
+  if (difficulty === 'easy') {
     nbRow = 8;
-  }
-  else if (difficulty === 'medium'){
+  } else if (difficulty === 'medium') {
     nbRow = 6;
-  }
-  else if (difficulty === 'hard'){
+  } else if (difficulty === 'hard') {
     nbRow = 4;
   }
+  
   const nbCol = word.length;
 
   return (
@@ -21,7 +21,7 @@ const Grid = (props) => {
           <tr key={rowIndex}>
             {[...Array(nbCol)].map((_, colIndex) => (
               <td key={colIndex}>
-                {rowIndex === 0 && colIndex === 0 ? word[0] : ''}
+                {rowIndex === 0 && colIndex < guessedWord.length ? guessedWord[colIndex] : ''}
               </td>
             ))}
           </tr>

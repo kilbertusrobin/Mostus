@@ -7,6 +7,7 @@ import './App.css';
 
 function App() {
   const [difficulty, setDifficulty] = useState('medium');
+  const [word, setWord] = useState(['C']);
 
   return (
     <>
@@ -16,13 +17,17 @@ function App() {
           <Grid 
             word='CATAPULTE'
             difficulty={difficulty}
+            guessedWord={word}
           />
           <div style={{display:'flex', flexDirection:'column', marginLeft:'5vw', height:'10vw', alignItems:'center', justifyContent:'space-around'}}>
             <Choice setDifficulty={setDifficulty} />
           </div>
         </div>
         <div id='keyboardiv'>
-          <Keyboard />
+          <Keyboard 
+            answer='CATAPULTE'
+            setWord={setWord}
+          />
         </div>
       </div>
     </>
