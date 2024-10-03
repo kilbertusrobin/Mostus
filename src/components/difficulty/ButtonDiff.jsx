@@ -1,19 +1,19 @@
 import React from 'react';
 
-const ButtonDiff = (props) => {
-  const { difficulty } = props;
+const ButtonDiff = ({ difficulty, onClick }) => {
   let color = '';
-  if (difficulty === 'easy'){
+  if (difficulty === 'Facile') {
     color = 'green';
-  }
-  else if (difficulty === 'medium'){
+  } else if (difficulty === 'Moyen') {
     color = 'orange';
-  }
-  else if (difficulty === 'hard'){
+  } else if (difficulty === 'Difficile') {
     color = 'red';
   }
+
   return (
-    <button style={{backgroundColor:color}}>{difficulty}</button>
+    <button style={{ backgroundColor: color, borderRadius:'10px', border:'none' }} onClick={onClick}>
+      {difficulty}
+    </button>
   );
 };
 
