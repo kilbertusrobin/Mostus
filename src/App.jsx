@@ -6,17 +6,23 @@ import Choice from './components/difficulty/Choice';
 import './App.css';
 
 function App() {
+  const answer = 'BLIZZARD';
   const [difficulty, setDifficulty] = useState('medium');
-  const [currentWord, setCurrentWord] = useState(['C']);
-  const [attempts, setAttempts] = useState([]); // Stocke les essais précédents
-  const [letterStates, setLetterStates] = useState([]); // Stocke les états des lettres pour chaque ligne
-  const [currentRow, setCurrentRow] = useState(0); // Index de la ligne actuelle
+  const [currentWord, setCurrentWord] = useState([answer[0]]);
+  const [attempts, setAttempts] = useState([]);
+  const [letterStates, setLetterStates] = useState([]);
+  const [currentRow, setCurrentRow] = useState(0);
 
   const handleCompleteWord = (newWord, newLetterStates) => {
-    setAttempts([...attempts, newWord]); // Ajoute le mot actuel aux tentatives
-    setLetterStates([...letterStates, newLetterStates]); // Ajoute les états des lettres
-    setCurrentRow(currentRow + 1); // Passe à la ligne suivante
-    setCurrentWord(['C']); // Réinitialise le mot avec la première lettre
+    setAttempts([...attempts, newWord]);
+    setLetterStates([...letterStates, newLetterStates]);
+    setCurrentRow(currentRow + 1);
+
+    if (currentRow === 0) {
+      setCurrentWord([answer[0]]);
+    } else {
+      setCurrentWord([]);
+    }
   };
 
   return (
@@ -25,7 +31,7 @@ function App() {
         <Title />
         <div id='gridiv'>
           <Grid
-            word='CATAPULTE'
+            word={answer}
             difficulty={difficulty}
             attempts={attempts}
             letterStates={letterStates}
@@ -38,10 +44,11 @@ function App() {
         </div>
         <div id='keyboardiv'>
           <Keyboard
-            answer='CATAPULTE'
+            answer={answer}
             currentWord={currentWord}
             setWord={setCurrentWord}
-            onCompleteWord={handleCompleteWord} // Fonction appelée quand un mot est complété
+            onCompleteWord={handleCompleteWord}
+            currentRow={currentRow}
           />
         </div>
       </div>

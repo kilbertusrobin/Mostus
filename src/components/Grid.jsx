@@ -14,14 +14,13 @@ const Grid = (props) => {
 
   const nbCol = word.length;
 
-  // Fonction pour définir la couleur de fond
   const getBackgroundColor = (rowIndex, colIndex) => {
     if (rowIndex < attempts.length) {
       return letterStates[rowIndex][colIndex] === 'correct' ? 'green'
         : letterStates[rowIndex][colIndex] === 'present' ? 'orange'
           : 'red';
     }
-    return ''; // Pas de couleur si on est encore en train de deviner
+    return '';
   };
 
   return (
@@ -34,7 +33,7 @@ const Grid = (props) => {
                 key={colIndex}
                 style={{ backgroundColor: getBackgroundColor(rowIndex, colIndex) }}
               >
-                {rowIndex < attempts.length ? attempts[rowIndex][colIndex] : // Montre les tentatives précédentes
+                {rowIndex < attempts.length ? attempts[rowIndex][colIndex] :
                   rowIndex === currentRow && colIndex < currentWord.length ? currentWord[colIndex] : ''}
               </td>
             ))}
