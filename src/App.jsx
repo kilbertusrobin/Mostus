@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import Grid from './components/Grid';
 import Keyboard from './components/Keyboard';
-import Title from './components/title';
+import Title from './components/Title';
 import Choice from './components/difficulty/Choice';
 import { fetchWordFromApi } from './components/api';
 import './App.css';
