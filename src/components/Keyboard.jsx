@@ -54,7 +54,6 @@ const Keyboard = (props) => {
         </React.Fragment>
       ))}
       <button onClick={handleDeleteClick}>Effacer</button>
-      <button>Entrer</button>
     </div>
   );
 };
