@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 
 const Keyboard = (props) => {
-  const { answer, currentWord, setWord, onCompleteWord, currentRow } = props;
+  const { answer, currentWord, setWord, onCompleteWord, currentRow, disabled } = props;
   const answerLength = answer.length;
   const letters = [
     'A', 'Z', 'E', 'R', 'T', 'Y', 'U', 'I', 'O', 'P',
@@ -17,7 +17,7 @@ const Keyboard = (props) => {
   }, [currentWord]);
 
   const handleButtonClick = (letter) => {
-    if (word.length < answerLength) {
+    if (!disabled && word.length < answerLength) {
       const newWord = [...word, letter];
       setWordState(newWord);
       setWord(newWord);
@@ -56,15 +56,18 @@ const Keyboard = (props) => {
           <button
             onClick={() => handleButtonClick(letter)}
             style={{
-              backgroundColor: inactiveLetters.includes(letter) ? '#303030' : 'initial'
+              backgroundColor: inactiveLetters.includes(letter) ? '#303030' : 'initial',
+              opacity: disabled ? 0.5 : 1,
+              cursor: disabled ? 'not-allowed' : 'pointer'
             }}
+            disabled={disabled}
           >
             {letter}
           </button>
           {(letter === 'P' || letter === 'M') && <br />}
         </React.Fragment>
       ))}
-      <button onClick={handleDeleteClick}>Effacer</button>
+      <button onClick={handleDeleteClick} disabled={disabled}>Effacer</button>
     </div>
   );
 };

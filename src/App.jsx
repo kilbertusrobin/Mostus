@@ -13,6 +13,7 @@ function App() {
   const [letterStates, setLetterStates] = useState([]);
   const [currentRow, setCurrentRow] = useState(0);
   const [answer, setAnswer] = useState('');
+  const [gameWon, setGameWon] = useState(false);
 
   useEffect(() => {
     const fetchAnswer = async () => {
@@ -23,11 +24,24 @@ function App() {
 
     fetchAnswer();
   }, []);
+  console.log(answer);
+  const maxAttempts = difficulty === 'easy' ? 8 : difficulty === 'medium' ? 6 : 4;
 
   const handleCompleteWord = (newWord, newLetterStates) => {
     setAttempts([...attempts, newWord]);
     setLetterStates([...letterStates, newLetterStates]);
     setCurrentRow(currentRow + 1);
+
+    if (newWord.join('') === answer) {
+      setGameWon(true);
+      setTimeout(() => {
+        alert("Félicitations, vous avez gagné !");
+      }, 300);
+    } else if (currentRow + 1 >= maxAttempts) {
+      setTimeout(() => {
+        alert(`Désolé, vous avez perdu ! Le mot était : ${answer}`);
+      }, 300);
+    }
 
     if (currentRow === 0) {
       setCurrentWord([answer[0]]);
@@ -35,7 +49,6 @@ function App() {
       setCurrentWord([]);
     }
   };
-  console.log(answer);
 
   return (
     <>
@@ -61,6 +74,7 @@ function App() {
             setWord={setCurrentWord}
             onCompleteWord={handleCompleteWord}
             currentRow={currentRow}
+            disabled={gameWon}
           />
         </div>
       </div>
