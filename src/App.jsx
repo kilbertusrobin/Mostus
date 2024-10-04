@@ -3,7 +3,7 @@ import Grid from './components/Grid';
 import Keyboard from './components/Keyboard';
 import Title from './components/Title';
 import Choice from './components/difficulty/Choice';
-import { fetchWordFromApi } from './components/api';
+import { fetchWordFromApi } from './components/Api';
 import './App.css';
 
 function App() {
