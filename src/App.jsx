@@ -50,7 +50,7 @@ function App() {
             currentWord={currentWord}
             currentRow={currentRow}
           />
-          <div style={{ display: 'flex', flexDirection: 'column', marginLeft: '5vw', height: '10vw', alignItems: 'center', justifyContent: 'space-around' }}>
+          <div style={{ display: 'flex', flexDirection: 'column', marginLeft: '5vw', height: '13vw', alignItems: 'center', justifyContent: 'space-around' }}>
             <Choice setDifficulty={setDifficulty} />
           </div>
         </div>
