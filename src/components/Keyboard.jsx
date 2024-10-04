@@ -10,6 +10,7 @@ const Keyboard = (props) => {
   ];
 
   const [word, setWordState] = useState(currentWord);
+  const [inactiveLetters, setInactiveLetters] = useState([]);
 
   useEffect(() => {
     setWordState(currentWord);
@@ -32,6 +33,9 @@ const Keyboard = (props) => {
           }
         });
 
+        const newInactiveLetters = newWord.filter((char) => !answer.includes(char));
+        setInactiveLetters([...inactiveLetters, ...newInactiveLetters]);
+
         onCompleteWord(newWord, newLetterStates);
       }
     }
@@ -49,7 +53,14 @@ const Keyboard = (props) => {
     <div>
       {letters.map((letter, index) => (
         <React.Fragment key={index}>
-          <button onClick={() => handleButtonClick(letter)}>{letter}</button>
+          <button
+            onClick={() => handleButtonClick(letter)}
+            style={{
+              backgroundColor: inactiveLetters.includes(letter) ? '#303030' : 'initial'
+            }}
+          >
+            {letter}
+          </button>
           {(letter === 'P' || letter === 'M') && <br />}
         </React.Fragment>
       ))}

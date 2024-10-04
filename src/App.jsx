@@ -3,7 +3,7 @@ import Grid from './components/Grid';
 import Keyboard from './components/Keyboard';
 import Title from './components/title';
 import Choice from './components/difficulty/Choice';
-import { fetchWordFromApi } from './components/api'; // Import de la fonction utilitaire
+import { fetchWordFromApi } from './components/api';
 import './App.css';
 
 function App() {
@@ -16,9 +16,9 @@ function App() {
 
   useEffect(() => {
     const fetchAnswer = async () => {
-      const wordFromApi = await fetchWordFromApi(); // Appel de la fonction
+      const wordFromApi = await fetchWordFromApi();
       setAnswer(wordFromApi);
-      setCurrentWord([wordFromApi[0]]); // Initialise currentWord avec la première lettre
+      setCurrentWord([wordFromApi[0]]);
     };
 
     fetchAnswer();
@@ -30,7 +30,7 @@ function App() {
     setCurrentRow(currentRow + 1);
 
     if (currentRow === 0) {
-      setCurrentWord([answer[0]]); // Réinitialise avec la première lettre
+      setCurrentWord([answer[0]]);
     } else {
       setCurrentWord([]);
     }
